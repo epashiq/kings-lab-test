@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-ProductModel productModelFromJson(String str) => ProductModel.fromJson(json.decode(str));
+ProductModel productModelFromJson(String str) =>
+    ProductModel.fromJson(json.decode(str));
 
 String productModelToJson(ProductModel data) => json.encode(data.toJson());
 
@@ -18,7 +19,8 @@ class ProductModel {
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-        products: List<Product>.from(json["products"].map((x) => Product.fromJson(x))),
+        products: List<Product>.from(
+            json["products"].map((x) => Product.fromJson(x))),
         total: json["total"],
         skip: json["skip"],
         limit: json["limit"],
@@ -98,7 +100,8 @@ class Product {
         warrantyInformation: json["warrantyInformation"],
         shippingInformation: json["shippingInformation"],
         availabilityStatus: json["availabilityStatus"],
-        reviews: List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
+        reviews:
+            List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
         returnPolicy: json["returnPolicy"],
         minimumOrderQuantity: json["minimumOrderQuantity"],
         meta: Meta.fromJson(json["meta"]),
@@ -215,4 +218,3 @@ class Review {
         "reviewerEmail": reviewerEmail,
       };
 }
-

@@ -13,6 +13,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    super.initState();
+    final productProvider =
+        Provider.of<ProductProvider>(context, listen: false);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      productProvider.getProducts();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
     final productProvider =
@@ -20,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Home'),
         centerTitle: true,
       ),
       body: Column(
@@ -30,7 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(12.0),
               child: Text(
                 'Welcome, ${authProvider.user!['firstName']}',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
           Expanded(
@@ -63,7 +74,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => const ProductEditScreen(),
+                            builder: (_) => ProductEditScreen(
+                              product: product,
+                            ),
                           ),
                         );
                       },
@@ -122,12 +135,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                       IconButton(
                                         icon: const Icon(Icons.edit, size: 20),
-                                        onPressed: () {
+                                        onPressed: () async {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (_) =>
-                                                  const ProductEditScreen(),
+                                              builder: (_) => ProductEditScreen(
+                                                  product: product),
                                             ),
                                           );
                                         },
