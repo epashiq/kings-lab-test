@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kings_lab_test/controller/provider/auth_provider.dart';
+import 'package:kings_lab_test/controller/provider/product_provider.dart';
 import 'package:kings_lab_test/view/screens/login_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +14,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => AuthProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => ProductProvider())
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
