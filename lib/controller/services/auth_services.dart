@@ -9,18 +9,16 @@ class AuthService {
     ),
   );
 
-  Future<Map<String, dynamic>> login({
-    required String username,
-    required String password,
-    int expiresInMins = 30,
-  }) async {
+  Future<Map<String, dynamic>> login(
+     String username,
+     String password,
+  ) async {
     try {
       final response = await dio.post(
         '/auth/login',
         data: {
           'username': username,
           'password': password,
-          'expiresInMins': expiresInMins,
         },
         options: Options(
           followRedirects: false,
